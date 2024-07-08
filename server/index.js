@@ -1,8 +1,9 @@
 import express from 'express';
-import authrouter from './routes/oauthRoute.js';
+import authRoute from "./routes/authRoute.js"
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -15,8 +16,9 @@ mongoose
   .catch((err) => console.log(err));
 
 app.use(express.json());
+app.use(cookieParser());
 
-app.use('/', authrouter);
+app.use('/',authRoute );
 app.use(
   cors({
     origin: ['http://localhost:3000'],
