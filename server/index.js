@@ -1,5 +1,5 @@
 import express from 'express';
-import authRoute from "./routes/authRoute.js"
+import authRoute from './routes/authRoute.js';
 import 'dotenv/config';
 import mongoose from 'mongoose';
 import cors from 'cors';
@@ -15,17 +15,18 @@ mongoose
   .then(() => console.log('connected to database'))
   .catch((err) => console.log(err));
 
-app.use(express.json());
-app.use(cookieParser());
-
-app.use('/',authRoute );
 app.use(
   cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:5173'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   })
 );
+
+app.use(express.json());
+app.use(cookieParser());
+
+app.use('/', authRoute);
 
 app.listen(port, (req, res) => {
   console.log(`server running on ${port}`);
